@@ -1,0 +1,7 @@
+*~
+.vscode
+*.csv
+subprojects
+builddir
+cpp-starter-project
+
