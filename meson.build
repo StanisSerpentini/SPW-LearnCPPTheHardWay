@@ -1,4 +1,4 @@
-project('learn-cpp-the-hard-way', 'cpp',
+project('SPW-LearnCPPTheHardWay', 'cpp',
     default_options: ['cpp_std=c++20'])
 
 fmt = dependency('fmt')
@@ -10,4 +10,5 @@ executable('ex09', 'ex09.cpp', dependencies: fmt)
 executable('ex13', 'ex13.cpp', dependencies: fmt)
 executable('ex14', 'ex14.cpp', dependencies: fmt)
 executable('ex16', 'ex16.cpp', dependencies: fmt)
-executable('ex20', 'ex20_v1.cpp', dependencies: fmt)
+executable('ex20_v1', 'ex20_v1.cpp', dependencies: fmt)
+executable('ex20_v2', 'ex20_v2.cpp', dependencies: fmt)
