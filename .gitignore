@@ -1,6 +1,7 @@
 *~
 .vscode
 *.csv
+*.txt
 subprojects
 builddir
 cpp-starter-project
