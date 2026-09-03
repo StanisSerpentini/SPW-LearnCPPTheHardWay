@@ -44,18 +44,39 @@ string first_arg(int& argc, char**& argv) {
     return arg;
 }
 
-void display_n_line(istream& in, size_t &n) {
-    string line;
-    vector<string> file;
+// seekg with one arg -> move to absolute position
+// seekg with two args -> move to relative position
+// seekg(10, in.end) -> move 10 bytes from the end
 
-    for (auto i = 0; getline(in, line); ++i) {
-        if (!in.eof())
-            line += '\n';
-        file.push_back(line);
+void display_n_line(istream& in, size_t &n) {
+    in.seekg(0, in.end);
+    streampos file_size = in.tellg();
+    streampos pos = file_size;
+    size_t lines_found = 0;
+    string line;
+    char c;
+
+    if (n == 0) return;
+
+    while (pos > 0 && lines_found < n) {
+        pos -= 1;
+        in.seekg(pos);
+        in.get(c);
+
+        if (c == '\n' && (pos != file_size - streamoff(1)))
+            lines_found++;
     }
 
-    for (size_t i = file.size() - min(file.size(), n); i < file.size(); ++i) {
-        print("{}", file[i]);
+    if (pos > 0) {
+        in.seekg(pos + streamoff(1));
+    } else {
+        in.seekg(0, in.beg);
+    }
+
+    while (getline(in, line)) {
+        if (!in.eof())
+            line += '\n';
+        print("{}", line);
     }
 }
 
