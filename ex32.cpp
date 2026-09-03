@@ -57,16 +57,17 @@ void display_n_line(istream& in, size_t &n) {
 int main(int argc, char* argv[]) {
     vector<char> opts;
     ifstream in_file;
-    char opt_char = getopt(argc, argv, "n");
+    int opt;
     size_t nb_line = 10;
 
-    while (opt_char != -1) {
-        opts.push_back(opt_char);
-        opt_char = getopt(argc, argv, "n");
-    }
-
-    if (find(opts.begin(), opts.end(), 'n') != opts.end()) {
-        nb_line = get_nb_line(argc, argv);
+    while((opt = getopt(argc, argv, "n:")) != -1) {
+        switch(opt) {
+            case 'n':
+                nb_line = std::stoi(optarg);
+                break;
+            default:
+                return 1;
+        }
     }
 
     if (count_args(argc, argv) > 0) {
